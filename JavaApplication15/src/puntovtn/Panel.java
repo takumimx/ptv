@@ -119,6 +119,11 @@ public class Panel extends javax.swing.JFrame {
 
         jComboBox1.setEditable(true);
         jComboBox1.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
+        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox1ActionPerformed(evt);
+            }
+        });
 
         jButton1.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
         jButton1.setText("Agregar");
@@ -204,6 +209,11 @@ public class Panel extends javax.swing.JFrame {
 
         jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/dinero.png"))); // NOI18N
         jButton2.setText("       Cobrar");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
         getContentPane().add(jButton2);
         jButton2.setBounds(1100, 650, 210, 60);
 
@@ -307,21 +317,26 @@ public class Panel extends javax.swing.JFrame {
 
         jButton8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/icon.png"))); // NOI18N
         jButton8.setText("Configuracion");
+        jButton8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton8ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(45, 45, 45)
-                .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(60, 60, 60)
+                .addGap(71, 71, 71)
                 .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(60, 60, 60)
+                .addGap(90, 90, 90)
+                .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(90, 90, 90)
                 .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(60, 60, 60)
+                .addGap(90, 90, 90)
                 .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(555, Short.MAX_VALUE))
+                .addContainerGap(439, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -407,7 +422,7 @@ public class Panel extends javax.swing.JFrame {
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         if(produc == null && user==null && inv==null){
             user = new Usuario();
-            user.setSize(600, 450);
+            user.setSize(590, 450);
             user.setLocationRelativeTo(null);
             user.setResizable(false);
             user.setVisible(true);
@@ -436,12 +451,7 @@ public class Panel extends javax.swing.JFrame {
                         CT.getTablaDatos(CODE);
                         jComboBox1.setSelectedItem(null);
                     }
-                    
-                        total = total + (double)jTable1.getValueAt(jTable1.getRowCount()-1, 3);
-                        
-                    jLabel4.setText(String.valueOf(total));
-                    jLabel5.setText(String.valueOf(jTable1.getRowCount()));
-
+                    totalizar();
                 }
             }
         }catch(Exception e){
@@ -452,8 +462,7 @@ public class Panel extends javax.swing.JFrame {
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
         if(jTable1.getRowCount()>0){
             try{
-                total = total - (double)jTable1.getValueAt(jTable1.getSelectedRow(), 3);
-                tabla.removeRow(jTable1.getSelectedRow());
+                factualizar();
           
             if(jTable1.getRowCount()==0){
                 total=0;
@@ -472,14 +481,54 @@ public class Panel extends javax.swing.JFrame {
   
     }//GEN-LAST:event_jTable1VetoableChange
 
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        try{
+            int count = tabla.getRowCount();
+
+            if(count<0){
+                JOptionPane.showMessageDialog(null,"Sin Productos Por Cobrar","Datos",JOptionPane.ERROR_MESSAGE);
+            }else{
+                for(int i=count-1 ;i >= 0; i-- ){
+                    tabla.removeRow(i);                    
+                }
+                total = 0;
+                jLabel4.setText(String.valueOf(total));
+                jLabel5.setText("0");
+                JOptionPane.showMessageDialog(null,"Cobro Realizado con Éxito","Éxito",JOptionPane.INFORMATION_MESSAGE);
+            }
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null, e.getMessage(),"Error Inesperado",JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBox1ActionPerformed
+//BOTON CONFIGURACION
+    private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
+        String nomTienda = "";
+        String nomAnterior = jLabel7.getText();
+        
+        nomTienda = JOptionPane.showInputDialog(null,"Ingrese nuevo nombre de la Tienda", nomAnterior);
+        if(nomTienda != null){
+            if(nomTienda.equals("")){
+                jLabel7.setText(nomAnterior);
+            } else {
+                jLabel7.setText(nomTienda);
+                //jLabel7.updateConfig(nomTienda);
+            }
+        }  
+        
+    }//GEN-LAST:event_jButton8ActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
+    public static javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
+    public static javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton8;
     private javax.swing.JButton jButton9;
@@ -499,4 +548,15 @@ public class Panel extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
+
+    private void totalizar() {
+        total = total + (double)jTable1.getValueAt(jTable1.getRowCount()-1, 3);    
+        jLabel4.setText(String.valueOf(total));
+        jLabel5.setText(String.valueOf(jTable1.getRowCount()));
+    }
+
+    private void factualizar() {
+        total = total - (double)jTable1.getValueAt(jTable1.getSelectedRow(), 3);
+        tabla.removeRow(jTable1.getSelectedRow());
+    }
 }

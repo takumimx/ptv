@@ -95,6 +95,12 @@ public class Productos extends javax.swing.JFrame {
         jLabel1.setText("Codigo de Producto:");
         jPanel1.add(jLabel1);
         jLabel1.setBounds(60, 40, 120, 14);
+
+        jTextField1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextField1KeyTyped(evt);
+            }
+        });
         jPanel1.add(jTextField1);
         jTextField1.setBounds(190, 40, 287, 27);
 
@@ -222,6 +228,18 @@ public class Productos extends javax.swing.JFrame {
         Panel.produc=null;
         dispose();
     }//GEN-LAST:event_formWindowClosing
+
+    private void jTextField1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField1KeyTyped
+    char caracter = evt.getKeyChar();
+
+      // Verificar si la tecla pulsada no es un digito
+      if(((caracter < '0') ||
+         (caracter > '9')) &&
+         (caracter != '\b'))
+      {
+         evt.consume();  // ignorar el evento de teclado
+      }        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField1KeyTyped
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

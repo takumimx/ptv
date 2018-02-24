@@ -13,6 +13,8 @@ public class Cm_Productos {
     private final String SQL_SELECT = "SELECT id_Code FROM productos";
     private final String SQL_SELECT2 = "SELECT descripcion FROM productos";
     private final String SQL_UPDATE = "UPDATE usuarios SET user= ?, password= ?, font= ?, font_size= ?, background=?, descripcion=?, avatar=? WHERE  id= ?";
+    private final String SQL_UPDATECONF = "UPDATE config SET cofig= ?";
+    
     private DefaultTableModel tabla;
     private PreparedStatement PS;
     private DefaultComboBoxModel DT;
@@ -111,5 +113,22 @@ public class Cm_Productos {
         } 
         return Inventario.tabla;
     }
+     
+    //METODO UPDATE BOTON CONFIGURACION
+    public void updateCongif(String nomTienda){
+       try {            
+            PS = CN.getConnection().prepareStatement(SQL_UPDATECONF);            
+            PS.setString(1, nomTienda);                   
+
+            PS.execute();
+            PS.close();            
+         }catch(Exception e){
+         System.out.println(e.getMessage());
+      }
+        finally{
+            PS = null;
+            RS = null;
+        } 
+   }
      
 }

@@ -12,8 +12,9 @@ import puntovtn.Panel;
 public class Comunicacion {
     private final String SQL_INSERT = "INSERT INTO usuarios(user,nombre,pass,t_user) values(?,?,?,?)";
     private final String SQL_SELECT = "SELECT user FROM usuarios";
-    private final String SQL_UPDATE = "UPDATE usuarios SET user= ?, password= ?, font= ?, font_size= ?, background=?, descripcion=?, avatar=? WHERE  id= ?";
-
+    private final String SQL_UPDATE = "UPDATE usuarios SET user= ?, password= ?, font= ?, font_size= ?, background=?, descripcion=?, avatar=?  WHERE  id= ?";
+    private final String SQL_UPDATECONF = "UPDATE config SET cofig= ?";
+    
     private PreparedStatement PS;
     private DefaultComboBoxModel DT;
     private final Db_Conexion CN;
@@ -132,5 +133,21 @@ public class Comunicacion {
         } 
         return Panel.tabla;
     }
+    //METODO UPDATE BOTON CONFIGURACION
+    public void updateCongif(String nomTienda){
+       try {            
+            PS = CN.getConnection().prepareStatement(SQL_UPDATECONF);            
+            PS.setString(1, nomTienda);                   
+
+            PS.execute();
+            PS.close();            
+         }catch(Exception e){
+         System.out.println(e.getMessage());
+      }
+        finally{
+            PS = null;
+            RS = null;
+        } 
+   }
     
 }
