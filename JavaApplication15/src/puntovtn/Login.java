@@ -5,12 +5,11 @@ import java.awt.event.KeyEvent;
 import javax.swing.JOptionPane;
 
 public class Login extends javax.swing.JFrame {
-    private final Comunicacion CP;
+    private final Login_Class vpn;
     
     public Login() {
         initComponents();
-        CP = new Comunicacion();
-        jLabel3.setBackground(new Color(44, 62, 80));
+        vpn = new Login_Class();
         listar();
     }
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -77,9 +76,12 @@ public class Login extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+    
     private void listar(){
-        jComboBox1.setModel(CP.getDatos());
+        jComboBox1.setModel(vpn.getAlluser());
+        jPasswordField1.requestFocus();
     }
+    
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         iniciar();
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -99,21 +101,34 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPasswordField jPasswordField1;
     // End of variables declaration//GEN-END:variables
+    
     private void iniciar(){
         String contra;
+        String usuario = jComboBox1.getSelectedItem().toString();
+        
         if(new String(jPasswordField1.getPassword()).equals("")){
             JOptionPane.showMessageDialog(null,"Ingrese una Contraseña","Dato Incorrecto",JOptionPane.ERROR_MESSAGE);
-        }else{
-            contra=CP.Validadar(jComboBox1.getSelectedItem().toString());
+        }else{          
+            contra=vpn.getPassword(usuario);        
             if(contra.equals(new String(jPasswordField1.getPassword()))){
                 Panel form1 = new Panel();
+                int t = vpn.getTypeuser(usuario);
+                if(t==0){
+                    Panel.jButton4.setEnabled(false);
+                    Panel.jButton6.setEnabled(false);
+                }else{
+                    Panel.jButton4.setEnabled(true);
+                    Panel.jButton6.setEnabled(true);
+                }
+                
                 Panel.produc=null;
                 Panel.user=null;
                 form1.setVisible(true);
                 dispose();
             }else{
-                JOptionPane.showMessageDialog(null,"Contraseña Incorrecta","Error de Datos",JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(null,"Contraseña Incorrecta","Dato Incorrect",JOptionPane.ERROR_MESSAGE);
                 jPasswordField1.setText("");
+                jPasswordField1.requestFocus();
             }
         }
     }
