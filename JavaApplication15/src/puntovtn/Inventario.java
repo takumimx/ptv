@@ -29,7 +29,6 @@ public class Inventario extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jTextField1 = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
 
@@ -67,16 +66,6 @@ public class Inventario extends javax.swing.JFrame {
         getContentPane().add(jTextField1);
         jTextField1.setBounds(200, 150, 431, 30);
 
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/buscar-codigo-simbolo-de-interfaz-de-una-lupa-con-numeros-de-codigo-binario.png"))); // NOI18N
-        jButton1.setText("Buscar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-        getContentPane().add(jButton1);
-        jButton1.setBounds(650, 145, 130, 40);
-
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/codigo-de-barras (2).png"))); // NOI18N
         getContentPane().add(jLabel1);
         jLabel1.setBounds(120, 130, 70, 70);
@@ -95,22 +84,7 @@ public class Inventario extends javax.swing.JFrame {
         Panel.inv = null;
     }//GEN-LAST:event_formWindowClosing
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        Comunicacion CT=new Comunicacion();
-        if(jTextField1.getText()!=null){
-            try{
-
-                String CODE = jTextField1.getText();
-                CT.getTablaDatos(CODE);
-                jTextField1.setText("");
-            }catch(Exception e){
-                JOptionPane.showMessageDialog(null,e.getMessage(),"Error",JOptionPane.ERROR_MESSAGE);
-            }
-        }
-    }//GEN-LAST:event_jButton1ActionPerformed
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;

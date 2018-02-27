@@ -209,7 +209,7 @@ public class Productos extends javax.swing.JFrame {
                     precio= (double) spinner.getValue();
                     if(precio>0){
                         int validar = CP.validar(code);
-                        if(validar==1){
+                        if(validar==0){
                             CP.insertDatos(code, descripcion, cantidad, (float) precio);
                             Panel.produc = null;
                             this.dispose();
