@@ -204,6 +204,8 @@ public class Productos extends javax.swing.JFrame {
         String code;
         int cantidad;
         double precio;
+        cantidad = (int)jSpinner1.getValue();
+        precio= (double) spinner.getValue();
         if(jTextField1.getText().equals("")){
             JOptionPane.showMessageDialog(null,"Necesita Ingresar el Codigo de Barra o Plu","Ingrese Datos",JOptionPane.INFORMATION_MESSAGE);
             jTextField1.setFocusable(true);
@@ -214,9 +216,8 @@ public class Productos extends javax.swing.JFrame {
                 jTextField2.setFocusable(true);
             }else{
                 descripcion = jTextField2.getText();
-                if((int)jSpinner1.getValue()>0){
-                    cantidad = (int)jSpinner1.getValue();
-                    precio= (double) spinner.getValue();
+                if(cantidad>0){
+                    
                     if(precio>0){
                         int validar = CP.validar(code);
                         if(validar==0){
@@ -244,12 +245,16 @@ public class Productos extends javax.swing.JFrame {
         String code = jTextField3.getText();
         if(!jTextField3.getText().equals("")){
             int cant =(int)jSpinner2.getValue();
-            int t = CP.cargar(cant,Integer.parseInt(jLabel8.getText()), code);
-            if(t==1){
-                JOptionPane.showMessageDialog(null, "Producto Actualizado Correctamente","Exito",JOptionPane.INFORMATION_MESSAGE);
-                jTextField3.setText("");
-                jSpinner2.setValue(0);
-                jLabel8.setText("");
+            if(cant>0){
+                int t = CP.cargar(cant,Integer.parseInt(jLabel8.getText()), code);
+                if(t==1){
+                    JOptionPane.showMessageDialog(null, "Producto Actualizado Correctamente","Exito",JOptionPane.INFORMATION_MESSAGE);
+                    jTextField3.setText("");
+                    jSpinner2.setValue(0);
+                    jLabel8.setText("");
+                }
+            }else{
+                JOptionPane.showMessageDialog(null,"La Cantidad a Ingresar Debe ser Mayor a 0","Insertar Datos",JOptionPane.ERROR_MESSAGE);
             }
         }
         
