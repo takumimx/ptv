@@ -10,12 +10,15 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
+import puntovtn.Usuario;
 
 /**
  *
  * @author Net Master
  */
 public class Login_Class {
+
+    
     private final Db_Conexion CN;
     private PreparedStatement PS;
     private ResultSet RS;
@@ -103,6 +106,38 @@ public class Login_Class {
             PS = null;
         }
         return 0;
+    }
+    public int setModific(String usuario){
+        
+        String SQL_SELECT = "SELECT * FROM usuarios WHERE user= ?";
+        int user_t=2;
+       
+        try{
+            PS = CN.getConnection().prepareStatement(SQL_SELECT);
+            PS.setString(1, usuario);
+            RS = PS.executeQuery();
+            if(RS.next()){
+               Usuario.jTextField3.setText(RS.getString(3));
+               user_t = RS.getInt(5);
+            }
+        }catch(SQLException e){
+            JOptionPane.showMessageDialog(null, e.getMessage(),"MySql",JOptionPane.ERROR_MESSAGE);
+        }
+        return user_t;
+    }
+
+    public void upUser(String usuario, String nombre, String pass, int tipo) {
+        try{
+            PS = CN.getConnection().prepareStatement("UPDATE usuarios SET nombre= ?, pass= ?, t_user= ? WHERE user= ?");
+            PS.setString(1, nombre);
+            PS.setString(2, pass);
+            PS.setInt(3, tipo);
+            PS.setString(4, usuario);
+            PS.executeUpdate();
+        }catch(SQLException e){
+            JOptionPane.showMessageDialog(null, e.getMessage(),"MySql",JOptionPane.ERROR_MESSAGE);
+        }
+
     }
 
 }

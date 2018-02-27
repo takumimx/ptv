@@ -11,7 +11,7 @@ public class Comunicacion {
 
     private final String SQL_INSERT = "INSERT INTO usuarios(user,nombre,pass,t_user) values(?,?,?,?)";
     private final String SQL_SELECT = "SELECT user FROM usuarios";
-    private final String SQL_UPDATE = "UPDATE usuarios SET user= ?, password= ?, font= ?, font_size= ?, background=?, descripcion=?, avatar=? WHERE  id= ?";
+    
 
     private PreparedStatement PS;
     private DefaultComboBoxModel DT;
@@ -44,26 +44,6 @@ public class Comunicacion {
         return 0;
     }
 
-//    public int actualizarDatos(String user,String password, String letra,int letra_size, String fondo,int id, String descripcion, String avatar){
-//        try{
-//            PS = CN.getConnection().prepareStatement(SQL_UPDATE);
-//            PS.setString(1, user);
-//            PS.setString(2, password);
-//            PS.setString(3, letra);
-//            PS.setInt(4,letra_size);
-//            PS.setString(5,fondo);
-//            PS.setString(6,descripcion);
-//            PS.setString(7,avatar);
-//            PS.setInt(8,id);
-//            int res = PS.executeUpdate();
-//            if (res > 0){
-//                JOptionPane.showMessageDialog(null,"Resgistro Guardado con Exito","Exito",JOptionPane.INFORMATION_MESSAGE);
-//            }
-//        }catch(Exception e){
-//            JOptionPane.showMessageDialog(null, e.getMessage(),"Error", JOptionPane.ERROR_MESSAGE);
-//        }
-//        return 0;
-//    }
     public DefaultComboBoxModel getDatos() {
         DT = new DefaultComboBoxModel();
         try {

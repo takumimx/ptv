@@ -9,10 +9,12 @@ public class Usuario extends javax.swing.JFrame {
         initComponents();
         vpn = new Login_Class();
         listar();
+        jComboBox1.setSelectedItem(null);
     }
     private void listar(){
+        
         jComboBox1.setModel(vpn.getAlluser());
-
+        
     }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -185,6 +187,21 @@ public class Usuario extends javax.swing.JFrame {
         jTextField3.setBounds(200, 60, 190, 26);
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBox1.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jComboBox1ItemStateChanged(evt);
+            }
+        });
+        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox1ActionPerformed(evt);
+            }
+        });
+        jComboBox1.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                jComboBox1PropertyChange(evt);
+            }
+        });
         jPanel1.add(jComboBox1);
         jComboBox1.setBounds(200, 20, 190, 26);
 
@@ -308,7 +325,7 @@ public class Usuario extends javax.swing.JFrame {
         String pass = new String (jPasswordField5.getPassword());
         int tipo;
 
-        if(jRadioButton1.isSelected()){
+        if(jRadioButton3.isSelected()){
             tipo = 1;
         }else{
             tipo = 0;
@@ -331,7 +348,7 @@ public class Usuario extends javax.swing.JFrame {
                         jPasswordField6.requestFocus();
                     }else{
                         if(new String(jPasswordField5.getPassword()).equals(new String(jPasswordField6.getPassword()))){
-                            vpn.setUser(usuario, nombre, pass, tipo);
+                            vpn.upUser(usuario, nombre, pass, tipo);
                             Panel.user=null;
                             this.dispose();
                         }else{
@@ -345,6 +362,33 @@ public class Usuario extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jComboBox1PropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jComboBox1PropertyChange
+        
+    }//GEN-LAST:event_jComboBox1PropertyChange
+int marcador=0;
+    private void jComboBox1ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBox1ItemStateChanged
+        int tp_user=2;
+        if(jComboBox1.getSelectedItem()!=null){
+            if(marcador==0){
+                String user=jComboBox1.getSelectedItem().toString();
+                tp_user=vpn.setModific(user);
+                if(tp_user==1){
+                    jRadioButton3.setSelected(true);
+                }
+                if(tp_user==0){
+                    jRadioButton4.setSelected(true);
+                }
+                marcador++;
+            }else{
+                marcador=0;
+            }
+        }
+    }//GEN-LAST:event_jComboBox1ItemStateChanged
+
+    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBox1ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroup1;
@@ -376,6 +420,6 @@ public class Usuario extends javax.swing.JFrame {
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
+    public static javax.swing.JTextField jTextField3;
     // End of variables declaration//GEN-END:variables
 }

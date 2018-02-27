@@ -503,7 +503,7 @@ char caracter = evt.getKeyChar();
     private javax.swing.JButton jButton5;
     public static javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
-    private javax.swing.JButton jButton8;
+    public static javax.swing.JButton jButton8;
     private javax.swing.JButton jButton9;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

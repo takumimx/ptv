@@ -116,9 +116,11 @@ public class Login extends javax.swing.JFrame {
                 if(t==0){
                     Panel.jButton4.setEnabled(false);
                     Panel.jButton6.setEnabled(false);
+                    Panel.jButton8.setEnabled(false);
                 }else{
                     Panel.jButton4.setEnabled(true);
                     Panel.jButton6.setEnabled(true);
+                    Panel.jButton8.setEnabled(true);
                 }
                 
                 Panel.produc=null;
