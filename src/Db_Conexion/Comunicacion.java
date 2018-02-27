@@ -2,10 +2,12 @@ package Db_Conexion;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import puntovtn.Panel;
+import puntovtn.Usuario;
 
 public class Comunicacion {
 
@@ -113,6 +115,32 @@ public class Comunicacion {
         }
         return t;
     }
+    public String inicial(){
+        String miTienda="";
 
+        try{
+            PS = CN.getConnection().prepareStatement("SELECT configuracion FROM config");
+            RS = PS.executeQuery();
+            while(RS.next()){
+               miTienda = RS.getString(1);
+            }
+        }catch(SQLException e){
+            JOptionPane.showMessageDialog(null, e.getMessage(),"MySql",JOptionPane.ERROR_MESSAGE);
+        }
+        return miTienda;
+    }
+    public void Config(String Config,String newConfig){
+
+
+        try{
+            PS = CN.getConnection().prepareStatement("UPDATE config SET configuracion= ? WHERE configuracion= ?");
+            PS.setString(1, newConfig);
+            PS.setString(2, Config);
+            PS.executeUpdate();
+        }catch(SQLException e){
+            JOptionPane.showMessageDialog(null, e.getMessage(),"MySql",JOptionPane.ERROR_MESSAGE);
+        }
+
+    }
  
 }

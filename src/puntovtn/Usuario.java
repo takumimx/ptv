@@ -284,9 +284,14 @@ public class Usuario extends javax.swing.JFrame {
                     jPasswordField1.requestFocus();
                 }else{
                     if(new String(jPasswordField1.getPassword()).equals(new String(jPasswordField2.getPassword()))){
-                        vpn.setUser(user, name, pass, t_user);
-                        Panel.user=null;
-                        dispose();
+                       if(vpn.getPassword(user).equals("")){
+                      
+                            vpn.setUser(user, name, pass, t_user);
+                            Panel.user=null;
+                            dispose();
+                       }else{
+                           JOptionPane.showMessageDialog(null, "Usuario Existente Intente Nuevamente", "Dato Existente", JOptionPane.ERROR_MESSAGE);
+                       }
                     }else{
                         JOptionPane.showMessageDialog(null, "Las Contraseñas no Coinciden", "Datos", JOptionPane.ERROR_MESSAGE);
                         jPasswordField1.setText("");

@@ -26,6 +26,8 @@ public class Panel extends javax.swing.JFrame {
         jPanel3.setBackground(new Color(44, 62, 80));
         this.setExtendedState(MAXIMIZED_BOTH);
         jTextField1.setText("");
+        String nombre=CT.inicial();
+        jLabel7.setText(nombre);
     }
 
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -331,7 +333,7 @@ public class Panel extends javax.swing.JFrame {
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
         if(produc==null || user==null || inv==null){
             int x;
-            x=JOptionPane.showConfirmDialog(null,"Decea Cerrar Sesión","Sesión Finalizada",JOptionPane.YES_NO_OPTION);
+            x=JOptionPane.showConfirmDialog(null,"Desea Cerrar Sesión","Sesión Finalizada",JOptionPane.YES_NO_OPTION);
             if(x==JOptionPane.YES_OPTION){
                 Login form1 = new Login();
                 form1.setSize(400, 462);
@@ -420,6 +422,7 @@ public class Panel extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         double pago;
+        if(jTable1.getRowCount()>0){
         try{
             pago= Double.parseDouble(JOptionPane.showInputDialog(null,"Ingrese Monto:"));
             if(pago>=total){
@@ -448,6 +451,9 @@ public class Panel extends javax.swing.JFrame {
         }catch(Exception e){
             JOptionPane.showMessageDialog(null,"Cobro Cancelado","Cancel",JOptionPane.ERROR_MESSAGE);
         }
+        }else{
+            JOptionPane.showMessageDialog(null,"Sin Productos Por Cobrar","Error de Datos",JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
@@ -455,12 +461,19 @@ public class Panel extends javax.swing.JFrame {
         String ante = jLabel7.getText();
         nomTienda = JOptionPane.showInputDialog(null,"Ingrese Nombre de Tienda",ante);
         if(nomTienda!=null){
-            if(nomTienda.equals("")){
-                jLabel7.setText(ante);
-                
+            if(nomTienda.length()<22&& nomTienda.length()>0){
+                if(nomTienda.equals("")){
+                    
+                    jLabel7.setText(ante);
+
+                }else{
+                    CT.Config(ante, nomTienda);
+                     jLabel7.setText(CT.inicial());
+
+                }
             }else{
-                jLabel7.setText(nomTienda);
-              
+                JOptionPane.showMessageDialog(null, "Ingrese un nombre valido menor a 22 letras y mayor a 0. Intente nuevamente","Error",JOptionPane.ERROR_MESSAGE);
+                jLabel7.setText(ante);
             }
         }
         

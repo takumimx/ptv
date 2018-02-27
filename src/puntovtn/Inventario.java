@@ -32,7 +32,7 @@ public class Inventario extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setMinimumSize(new java.awt.Dimension(891, 498));
+        setMinimumSize(new java.awt.Dimension(891, 520));
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent evt) {
                 formWindowClosing(evt);
@@ -61,15 +61,14 @@ public class Inventario extends javax.swing.JFrame {
         jScrollPane1.setViewportView(jTable1);
 
         getContentPane().add(jScrollPane1);
-        jScrollPane1.setBounds(40, 150, 823, 290);
+        jScrollPane1.setBounds(40, 170, 823, 290);
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/codigo-de-barras (2).png"))); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/la-busqueda-de-empleo.png"))); // NOI18N
         getContentPane().add(jLabel1);
-        jLabel1.setBounds(110, 40, 70, 70);
+        jLabel1.setBounds(110, 10, 150, 130);
 
         jLabel2.setFont(new java.awt.Font("Verdana", 0, 36)); // NOI18N
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/padnote.png"))); // NOI18N
         jLabel2.setText("Control de Inventario");
         getContentPane().add(jLabel2);
         jLabel2.setBounds(200, 40, 520, 70);
