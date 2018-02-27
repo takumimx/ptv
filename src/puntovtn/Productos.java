@@ -62,6 +62,7 @@ public class Productos extends javax.swing.JFrame {
         jButton3 = new javax.swing.JButton();
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
+        jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setTitle("Registro de Productos");
@@ -154,7 +155,7 @@ public class Productos extends javax.swing.JFrame {
             }
         });
         jPanel2.add(jTextField3);
-        jTextField3.setBounds(200, 80, 287, 27);
+        jTextField3.setBounds(200, 80, 230, 27);
 
         jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jPanel2.add(jLabel8);
@@ -180,6 +181,15 @@ public class Productos extends javax.swing.JFrame {
         jLabel10.setText("Cantidad:");
         jPanel2.add(jLabel10);
         jLabel10.setBounds(70, 120, 120, 20);
+
+        jButton2.setText("Cargar");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+        jPanel2.add(jButton2);
+        jButton2.setBounds(440, 80, 80, 23);
 
         jTabbedPane2.addTab("Agregar", jPanel2);
 
@@ -209,7 +219,7 @@ public class Productos extends javax.swing.JFrame {
                     precio= (double) spinner.getValue();
                     if(precio>0){
                         int validar = CP.validar(code);
-                        if(validar==1){
+                        if(validar==0){
                             CP.insertDatos(code, descripcion, cantidad, (float) precio);
                             Panel.produc = null;
                             this.dispose();
@@ -237,6 +247,9 @@ public class Productos extends javax.swing.JFrame {
             int t = CP.cargar(cant,Integer.parseInt(jLabel8.getText()), code);
             if(t==1){
                 JOptionPane.showMessageDialog(null, "Producto Actualizado Correctamente","Exito",JOptionPane.INFORMATION_MESSAGE);
+                jTextField3.setText("");
+                jSpinner2.setValue(0);
+                jLabel8.setText("");
             }
         }
         
@@ -287,9 +300,15 @@ public class Productos extends javax.swing.JFrame {
 //        }
     }//GEN-LAST:event_jTextField3KeyPressed
 
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        String code = jTextField3.getText();
+        CP.validar(code);
+    }//GEN-LAST:event_jButton2ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;

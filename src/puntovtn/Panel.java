@@ -467,7 +467,7 @@ public class Panel extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton8ActionPerformed
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
-        int option=JOptionPane.showConfirmDialog(null,"¿Decea Cerrar?","Cerrar",JOptionPane.YES_NO_OPTION);
+        int option=JOptionPane.showConfirmDialog(null,"¿Desea Cerrar?","Cerrar",JOptionPane.YES_NO_OPTION);
         if(option==JOptionPane.YES_OPTION){
             if(finalizar()==1){
                 Login form1 = new Login();
@@ -477,8 +477,6 @@ public class Panel extends javax.swing.JFrame {
                 form1.setVisible(true);
                 dispose();
             }
-        }else{
-            
         }
     }//GEN-LAST:event_formWindowClosing
 
